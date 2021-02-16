@@ -1,0 +1,26 @@
+#!/bin/sh
+# referenced pi-bluetooth, bluetooth attach for Revolution Pi BT
+. /usr/bin/revpi-common
+
+HCIATTACH=/usr/bin/hciattach
+TTYDEVNAME=ttyREVPIBT
+
+revpi_dev_type
+DTYPE=$?
+
+if [ "0" = $DTYPE ] ; then
+  OPTS=""
+  TYPEID="any"
+  SPEED=""
+  FLOW=""
+  BDADDR=""
+elif [ "2" = $DTYPE ] ; then
+  OPTS=""
+  TYPEID="any"
+  SPEED=""
+  FLOW=""
+  BDADDR=""
+fi
+
+# ttyREVPIBT is symlink created in revpi-tools/50-revpi.rules
+$HCIATTACH $OPTS $TTYDEVNAME $TYPEID $SPEED $FLOW $BDADDR

@@ -1,0 +1,14 @@
+[Unit]
+Description=Configure Bluetooth Devices on Revolution Pi
+ConditionPathIsSymbolicLink=/dev/ttyREVPIBT
+
+# TODO: find the right *.device to after
+Requires=dev-ttyREVPIBT.device
+After=dev-ttyREVPIBT.device
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/revpi-btuart
+
+[Install]
+WantedBy=multi-user.target

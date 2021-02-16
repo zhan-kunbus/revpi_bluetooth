@@ -1,0 +1,2 @@
+# Revolution Pi bluetooth module: start the revpi-bthelper service
+ACTION=="add", SUBSYSTEM=="bluetooth", KERNEL=="hci[0-9]", TAG+="systemd", ENV{SYSTEMD_WANTS}+="revpi-bthelper@%k.service"
