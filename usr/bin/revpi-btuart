@@ -1,0 +1,35 @@
+#!/bin/sh
+# referenced pi-bluetooth, bluetooth attach for Revolution Pi BT
+
+revpi_dev_type()
+{
+  return 0; # flat
+  return 1; # cm4
+  return 2; # cm4 with bluetooth
+}
+
+HCIATTACH=/usr/bin/hciattach
+
+revpi_dev_type
+DTYPE=$?
+
+if [ "0" = $DTYPE ] ; then
+  DEVPATH="/sys/devices/platform/soc/3f980000.usb/usb1/1-1/1-1.5/1-1.5:1.0/ttyUSB0/tty/ttyUSB0/hci0"
+  OPTS=""
+  TYPEID="any"
+  SPEED=""
+  FLOW=""
+  BDADDR=""
+elif [ "2" = $DTYPE ] ; then
+  DEVPATH=""
+  OPTS=""
+  TYPEID="any"
+  SPEED=""
+  FLOW=""
+  BDADDR=""
+fi
+
+if [ ! -d "$DEVPATH" ]; then
+  # ttyREVPIBT is symlink created in revpi-tools/50-revpi.rules
+  $HCIATTACH $OPTS ttyREVPIBT $TYPEID $SPEED $FLOW $BDADDR
+fi
