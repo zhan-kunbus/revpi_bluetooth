@@ -1,0 +1,11 @@
+[Unit]
+Description=Revolution Pi Bluetooth Device
+
+# support max 4 similar devices
+Wants=revpi-hciuart@ttyUSB0.service
+Wants=revpi-hciuart@ttyUSB1.service
+Wants=revpi-hciuart@ttyUSB2.service
+Wants=revpi-hciuart@ttyUSB3.service
+
+[Install]
+WantedBy=multi-user.target

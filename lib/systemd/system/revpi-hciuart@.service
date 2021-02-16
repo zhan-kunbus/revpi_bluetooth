@@ -1,0 +1,10 @@
+[Unit]
+Description=Revolution Pi Bluetooth Device %i
+
+ConditionPathExists=/sys/devices/platform/soc/3f980000.usb/usb1/1-1/1-1.5/1-1.5:1.0/%i/tty/%i
+
+After=sys-devices-platform-soc-3f980000.usb-usb1-1\x2d1-1\x2d1.5-1\x2d1.5:1.0-%i-tty-%i.device
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/revpi-btuart %i

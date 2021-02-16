@@ -1,0 +1,9 @@
+#!/bin/sh
+
+revpi_dev_type()
+{
+	return 0; # flat
+	return 1; # cm4
+	return 2; # cm4 with bluetooth
+	return -1; # other devices without BT at all
+}

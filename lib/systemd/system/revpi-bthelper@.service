@@ -1,0 +1,9 @@
+[Unit]
+Description=Revolution Pi bluetooth helper for %I
+Requires=bluetooth.service
+After=bluetooth.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/revpi-bthelper %I
+RemainAfterExit=yes

@@ -1,0 +1,29 @@
+#!/bin/sh
+# referenced pi-bluetooth, bluetooth attach for Revolution Pi BT
+. /usr/bin/revpi-common
+
+HCIATTACH=/usr/bin/hciattach
+TTYDEVNAME="$1"
+
+revpi_dev_type
+DTYPE=$?
+
+if [ "0" = $DTYPE ]; then
+  OPTS=""
+  TYPEID="any"
+  SPEED=""
+  FLOW=""
+  BDADDR=""
+elif [ "2" = $DTYPE ]; then
+  OPTS=""
+  TYPEID="any"
+  SPEED=""
+  FLOW=""
+  BDADDR=""
+else
+  # on Non-uart BT equiped device, this shouldn't reach, as this service is
+  # triggered by udev rule in 90-revpi-bluetooth.rules, which should not matched
+  exit 0
+fi
+
+$HCIATTACH $OPTS $TTYDEVNAME $TYPEID $SPEED $FLOW $BDADDR
